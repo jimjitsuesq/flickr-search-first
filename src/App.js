@@ -9,8 +9,9 @@ import axios from 'axios';
 import apiKey from './config.js'
 import './App.css';
 import './css/index.css';
-import PhotoList from './Components/PhotoList'
-import Nav from './Components/Nav'
+import PhotoList from './Components/PhotoList';
+import Nav from './Components/Nav';
+import JiuJitsu from './Components/JiuJitsu';
 import SearchForm from './Components/SearchForm.js';
 import NotFound from './Components/NotFound.js';
 // import searchText from './Components/SearchForm.js';
@@ -24,18 +25,6 @@ export default class App extends Component {
       searchTextParent: ''
     };
   }
-
-  /* onSearchChange = (e) => {
-    this.setState({searchText: e.target.value})
-    console.log(this.state.searchText)
-  }
-
-  handleSubmit = e => {
-    e.preventDefault();
-    this.onSearchChange(this.state.searchText);
-    e.currentTarget.reset();
-    console.log(e)
-  } */
 
   componentDidMount() {
     this.performSearch(this.state.searchTextParent);
@@ -71,18 +60,17 @@ export default class App extends Component {
       <BrowserRouter>
       <div className="container">
         <SearchForm onSearch={this.getSearchString} />
-        
-          {/* <Route path="/jiujitsu" component ={}} */}
+          
           <Nav onClick={this.getSearchString} />
 
         <div className="photo-container">
           <h2>Results</h2>
-            {/* <Switch> */}
-              <Route exact path="/" />
-              {/* <Route exact path="/wrestling" render={ () => {this.performSearch("wrestling")} } /> */}
+            <Switch>
+              <Route path="/JiuJitsu" />
+              <Route path="/wrestling" />
               <Route path="/mma" />
               <Route path="/NotFound" component={NotFound} />
-            {/* </Switch> */}
+            </Switch>
             <PhotoList data={this.state.images} />
         </div>
 

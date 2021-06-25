@@ -9,7 +9,7 @@ export default class Nav extends Component {
     
     handleClick = e => {
         console.log(e.target.innerText)
-        e.preventDefault();
+        // e.preventDefault();
         this.setState({ buttonText: e.target.innerText }, () =>
         this.props.onClick(this.state.buttonText));
     }
@@ -17,12 +17,12 @@ export default class Nav extends Component {
         return(
             <nav className="main-nav">
                 <ul>
-                    <li><NavLink to="/jiujitsu" onClick={(e) => this.handleClick(e)}>Jiu Jitsu</NavLink></li>
+                    <li><NavLink to="/JiuJitsu" onClick={(e) => this.handleClick(e)}>Jiu Jitsu</NavLink></li>
                     <li><NavLink to="/wrestling" onClick={(e) => this.handleClick(e)}>Wrestling</NavLink></li>
                     <li><NavLink to="/mma" onClick={(e) => this.handleClick(e)}>MMA</NavLink></li>
                 </ul>
 
-            <Route path={`/:${this.state.buttonText}`} />
+            <Route path={'/:this.state.buttonText'} />
             </nav>
         )
     }
