@@ -1,29 +1,26 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Route, NavLink } from 'react-router-dom';
 
-export default class Nav extends Component {
+const Nav = ({data, onNavClick}) => {   
     
-    state = {
-        buttonText: ''
+    let handleClick = (e) => {
+        data = e.target.id
+        onNavClick(data)
     }
-    
-    handleClick = e => {
-        console.log(e.target.innerText)
-        // e.preventDefault();
-        this.setState({ buttonText: e.target.innerText }, () =>
-        this.props.onClick(this.state.buttonText));
-    }
-    render () {
-        return(
-            <nav className="main-nav">
-                <ul>
-                    <li><NavLink to="/JiuJitsu" onClick={(e) => this.handleClick(e)}>Jiu Jitsu</NavLink></li>
-                    <li><NavLink to="/wrestling" onClick={(e) => this.handleClick(e)}>Wrestling</NavLink></li>
-                    <li><NavLink to="/mma" onClick={(e) => this.handleClick(e)}>MMA</NavLink></li>
-                </ul>
-
-            <Route path={'/:this.state.buttonText'} />
-            </nav>
-        )
-    }
+     
+    return(
+        <nav className="main-nav">
+            <ul>
+                {/* <li><NavLink to="search/JiuJitsu">Jiu Jitsu</NavLink></li>
+                <li><NavLink to="search/wrestling">Wrestling</NavLink></li>
+                <li><NavLink to="search/MixedMartialArts">Mixed Martial Arts</NavLink></li> */}
+                <li><NavLink to="/JiuJitsu" id="/search/JiuJitsu" onClick={(e) => handleClick(e)}>Jiu Jitsu</NavLink></li>
+                <li><NavLink to="/wrestling" id="/search/Wrestling" onClick={(e) => handleClick(e)}>Wrestling</NavLink></li>
+                <li><NavLink to="/MixedMartialArts" id="/search/MixedMartialArts" onClick={(e) => handleClick(e)}>Mixed Martial Arts</NavLink></li>
+                <li><NavLink to="/">Home</NavLink></li>
+            </ul>
+        </nav>
+    )
 }
+
+export default Nav;

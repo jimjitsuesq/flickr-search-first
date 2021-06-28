@@ -1,36 +1,35 @@
 // import React from 'react';
 import React, { Component } from 'react';
+import { Route , withRouter} from 'react-router-dom';
 
-export default class SearchForm extends Component {
-
+class SearchForm extends Component {
     state = {
-        searchTextChild: ''
+        searchText: ''
     }
 
     onSearchChange = e => {
-        this.setState({ searchTextChild: e.target.value });
+        this.setState({ searchText: '/search/' + e.target.value})
         console.log(e.target.value)
-        console.log(this.state.searchTextChild)
+        console.log(this.state.searchText)
     }
-
-
-// const SearchForm = ({onSearchChange}) => {
 
     handleSubmit = e => {
         e.preventDefault();
-        this.props.onSearch(this.query.value);
+        this.props.onSearch(this.state.searchText);
         console.log(e)
+        let path = `${this.state.searchText}`
+        this.props.history.push(path);
+        console.log(path)
         e.currentTarget.reset();
     }
 
     render () {
         return(
-            // <form className="search-form">
             <form className="search-form" onSubmit={this.handleSubmit} >
                 <input  type="search" 
                         onChange={this.onSearchChange}
                         name="search"
-                        ref={(input) => this.query = input}
+                        // ref={(input) => this.query = input}
                         placeholder="Search" required/>
                 <button type="submit" className="search-button">
                 <svg fill="#fff" height="24" viewBox="0 0 23 23" width="24" xmlns="http://www.w3.org/2000/svg">
@@ -43,4 +42,4 @@ export default class SearchForm extends Component {
     }
 }
 
-// export default SearchForm
+export default withRouter(SearchForm)
