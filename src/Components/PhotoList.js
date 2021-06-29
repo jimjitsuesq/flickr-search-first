@@ -12,9 +12,12 @@ const PhotoList = props => {
     }
 
     return(
-        <ul>
-            {photos}
-        </ul>
+        <div>
+          <h2>Results for "{(props.query).slice(8)}"</h2>
+            <ul>
+                {photos}
+            </ul>
+        </div>
     )
 }
 

@@ -1,6 +1,6 @@
 // import React from 'react';
 import React, { Component } from 'react';
-import { Route , withRouter} from 'react-router-dom';
+import { Route , withRouter, history} from 'react-router-dom';
 
 class SearchForm extends Component {
     state = {
@@ -19,7 +19,7 @@ class SearchForm extends Component {
         console.log(e)
         let path = `${this.state.searchText}`
         this.props.history.push(path);
-        console.log(path)
+        // console.log(path)
         e.currentTarget.reset();
     }
 

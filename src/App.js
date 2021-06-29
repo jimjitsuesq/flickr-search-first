@@ -16,7 +16,8 @@ import PhotoList from './Components/PhotoList';
 import Nav from './Components/Nav';
 import SearchForm from './Components/SearchForm.js';
 import NotFound from './Components/NotFound.js';
-import SearchResults from './Components/SearchResults.js';
+import Home from './Components/Home.js';
+// import SearchResults from './Components/SearchResults.js';
 // import { useFetch } from './useFetch.js';
 
 export default class App extends Component {
@@ -25,7 +26,7 @@ export default class App extends Component {
     this.state = {
       images: [],
       loading : true,
-      queryText: '',
+      queryText: ''
       // currentLocation: window.location.pathname
     };
   }
@@ -48,7 +49,11 @@ export default class App extends Component {
       // this.performSearch(str)
       // this.setState({queryText: window.location.pathname})
       this.getSearchString(window.location.pathname)
-  }}
+    }
+    window.onpopstate  = (e) => {
+      this.getSearchString(window.location.pathname)
+  } 
+  }
 
   componentDidMount() {
     if (this.state.queryText !== window.location.pathname) {
@@ -107,33 +112,26 @@ export default class App extends Component {
     // this.usePageViews() 
     
     return (
-      <BrowserRouter>
-        <div className="container">
-          <SearchForm onSearch={this.getSearchString} />
-            <Nav onNavClick={this.getSearchString} />
-            {/* <Nav /> */}
-          <div className="photo-container">
-          
-            <h2>Results</h2>
-              <Switch>
-                <Route exact path="/"/>
-                <Route exact path="/JiuJitsu">
-                    <Redirect to="/search/JiuJitsu" />
-                </Route>
-                <Route exact path="/wrestling">
-                    <Redirect to="/search/wrestling" />
-                </Route>
-                <Route exact path="/MixedMartialArts">
-                    <Redirect to="/search/MixedMartialArts" />
-                </Route>
-                <Route path="/search/" />
-                <Route path="/NotFound" component={NotFound} />
-              </Switch>
-              <PhotoList data={this.state.images} />
-          </div>
-
+      <div className="container">
+        <SearchForm onSearch={this.getSearchString} />
+        <Nav onNavClick={this.getSearchString} />
+        <div className="photo-container">
+          <Switch>
+            <Route exact path="/" component={Home}/>
+            <Route path="/search/" render={(props) => <PhotoList query={this.state.queryText} data={this.state.images} /> } />
+            <Route exact path="/search/JiuJitsu">
+                {/* <Redirect to="/search/JiuJitsu" /> */}
+            </Route>
+            <Route exact path="/search/wrestling">
+                {/* <Redirect to="/search/wrestling"/> */}
+            </Route>
+            <Route exact path="/search/MixedMartialArts">
+                {/* <Redirect to="/search/MixedMartialArts" /> */}
+            </Route>
+            <Route path="/NotFound" component={NotFound} />
+          </Switch>
         </div>
-    </BrowserRouter>
+      </div>
     );
     
   }
