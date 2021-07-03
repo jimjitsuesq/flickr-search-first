@@ -42,18 +42,29 @@ export default class App extends Component {
  */
   componentDidMount() {
     if (this.state.currentLocation !== window.location.pathname) {
-      this.getSearchString(window.location.pathname)
+        this.getSearchString(window.location.pathname)
+      } 
+  }
+/**
+ * Resets the loading state after search is performed
+ */
+  resetLoadingState() {
+    if (this.state.loading === false) {
+      this.setState ({
+        loading: true
+      })
     }
   }
 /**
  * Modifies the window location passed by the calling component used to get 
- * the search string
+ * the search string.  
  * @param {string} str The value a component passes to the performSearch 
  * function to perform the search 
  */
   getSearchString = (str) => {
     str = (str).slice(8)
     this.performSearch(str)
+    this.resetLoadingState()
   }
 /**
  * The function that performs the photo search
@@ -71,7 +82,7 @@ export default class App extends Component {
       })
       .catch(error => {
         console.log('Error fetching and parsing data', error);
-      });
+      })
   }
 
   render() { 
