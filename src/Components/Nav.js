@@ -1,6 +1,14 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 
+/**
+ * Component that renders the navigation bar and sends click information back
+ * to App.js for processing
+ * @param {string} searchText The string passed back to App.js containing the
+ * search string to be sent to Flickr
+ * @param {function} onNavClick The handler used when a user clicks
+ * @returns the searchText
+ */
 const Nav = ({searchText, onNavClick}) => {
     function handleClick (e) {
         searchText = e.target.id

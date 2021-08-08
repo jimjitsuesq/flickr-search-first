@@ -16,26 +16,40 @@ function App() {
     const [loading, setLoading] = useState(true);
     const [queryText, setQueryText] = useState('');
 
+    /**
+     * Used to update the state variables after navigation in the app.
+     * @param {string} str Used to pass the search string from the Nav and
+     * SearchForm components
+     */
     function updateState (str) {
+        if(str !== queryText) {
         setLoading(true)
         setQueryText(str)
-    }
-
-    useEffect(() =>{
-        async function getPhotos () {
-        try {
-            if(window.location.pathname !== '/') {
-            const response = await axios.get(`https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=${apiKey}&tags=${queryText}&per_page=24&sort=interestingness-asc&format=json&nojsoncallback=1`)
-            setImages(response.data.photos.photo)
-            setLoading(false)
-            }
-        } catch (error) {
-            console.log('Error fetching and parsing data', error);
         }
     }
+
+    /**
+     * Used to retrieve photos from Flickr whenever the component is rendered.
+     */
+    useEffect(() =>{
+        async function getPhotos () {
+            try {
+                if(window.location.pathname !== '/'  && queryText !== '') {
+                const response = await axios.get(`https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=${apiKey}&tags=${queryText}&per_page=24&sort=interestingness-asc&format=json&nojsoncallback=1`)
+                setImages(response.data.photos.photo)
+                setLoading(false)
+                }
+            } catch (error) {
+                console.log('Error fetching and parsing data', error);
+            }
+        }       
     getPhotos()
     },[queryText])
 
+    /**
+     * Renders the list of photos
+     * @returns The PhotoList component
+     */
     const displayPhotos = () => {
         return(
             <PhotoList 
@@ -46,19 +60,27 @@ function App() {
         )
     }
 
+    /**
+     * Helper function used to trigger a state update when the user navigates 
+     * in specific ways.
+     */
+    const updateOnChange = () => {
+        if(window.location.pathname !== '/') {
+            updateState((window.location.pathname).slice(8))
+        } 
+    }
+    
+    /**
+     * Triggers the getPhotos function when the user reloads the page or uses 
+     * the back or forward buttons in the browser by calling the updateOnChange
+     * helper function.
+     */
     useEffect(() => {
         window.onpopstate = () => {
-            if(window.location.pathname !== '/') {
-                updateState((window.location.pathname).slice(8))
-            } 
+            updateOnChange()
         }
-    })
-
-    useEffect(() => {
         window.onload = () => {
-            if(window.location.pathname !== '/') {
-                updateState((window.location.pathname).slice(8))
-            } 
+            updateOnChange()
         }
     })
  

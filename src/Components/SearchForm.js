@@ -1,11 +1,14 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
+import logo from '../logo2.jpg';
 
 /**
- * Handles the app's search functionality, both when the actual search
- * button is clicked and when the enter key is pressed for a search
+ * Renders the search form and handles the app's search submission functionality, 
+ * both when the actual search button is clicked and when the enter key is
+ * pressed for a search.
+ * @param {*} props Used to send back the search string for submission to Flickr.
+ * @returns searchText
  */
-
 function SearchForm (props) {
     const [ searchText, setSearchText ] = useState('')
     let history = useHistory()
@@ -18,6 +21,8 @@ function SearchForm (props) {
     }
 
     return(
+        <>
+        <img src={logo} alt='app logo' />
         <form   className="search-form" 
                 onSubmit={handleSubmit} >
             <input  type="search" 
@@ -33,6 +38,7 @@ function SearchForm (props) {
             </svg>
             </button>
         </form>
+        </>
     )
 }
 

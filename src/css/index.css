@@ -1,12 +1,18 @@
 body {
   text-align: center;
-  font-family: 'Open Sans', sans-serif;
-  color: #3f4850;
+  font-family: Calibri, Candara, Segoe, Segoe UI, Optima, Arial, sans-serif;
+  color: #222831;
+  background-color: #FFFFFF;
+  margin-top: -30px;
 }
 
 h2 {
   font-size: 2em;
   margin: 5px 0 40px;
+}
+
+h3 {
+  font-size: 1.50em;
 }
 
 ul {
@@ -21,12 +27,12 @@ a {
 .search-form {
   max-width: 460px;
   display: flex;
-  margin: 0 auto 32px;
+  margin: 20px auto 20px;
 }
 
 .search-form button {
   outline: none;
-  background-color: #438bbd;
+  background-color: #393E46;
   border: none;
   padding: 0px 15px;
   border-radius: 0 0.35em 0.35em 0;
@@ -44,6 +50,10 @@ input {
   outline: none;
 }
 
+.italicized {
+  font-style: italic;
+}
+
 .main-nav li {
   width: 100%;
   margin-bottom: 1em;
@@ -51,7 +61,7 @@ input {
 
 .main-nav a {
   display: block;
-  background: #438bbd;
+  background: #393E46;
   border-radius: 3px;
   padding: 5px;
   color: #fff;
@@ -60,7 +70,11 @@ input {
 .main-nav .active,
 .main-nav a:hover,
 .search-form button:hover {
-  background-color: #275270;
+  background-color: #B55400;
+}
+
+.photo-container p {
+  font-size: 1.2em;
 }
 
 .photo-container ul {
