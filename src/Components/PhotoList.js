@@ -9,13 +9,19 @@ import NoMatch from './NoMatch';
  * @returns an object containing the rendered photo display
  */
 const PhotoList = props => {
+    console.log(props.loading)
     const results = props.data
     let photos;
     if(props.loading) {
         <p>Loading...</p>
     } else {
         if (props.data.length) {
-            photos = results.map(photo => <Photo displayURL={`https://flickr.com/photos/${photo.owner}`} clickURL={`https://live.staticflickr.com/${photo.server}/${photo.id}_${photo.secret}_z.jpg`} key={`${photo.id}`}/>);
+            photos=results.map(photo => <Photo 
+                                            displayURL={`https://flickr.com/photos/${photo.owner}`} 
+                                            clickURL={`https://live.staticflickr.com/${photo.server}/${photo.id}_${photo.secret}_z.jpg`} 
+                                            key={`${photo.id}`}
+
+                                        />);
         } else {
             photos = <NoMatch />
         }
@@ -26,7 +32,7 @@ const PhotoList = props => {
                 ?  <p>Loading...</p>
                 :
                 <div>
-                <h2>Search Results for "{(props.query)}"</h2>
+                <h2>Search Results for "{decodeURI(props.queryText)}"</h2>
                     <ul>
                         {photos}
                     </ul>
