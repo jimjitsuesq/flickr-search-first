@@ -9,7 +9,6 @@ import NoMatch from './NoMatch';
  * @returns an object containing the rendered photo display
  */
 const PhotoList = props => {
-    console.log(props.loading)
     const results = props.data
     let photos;
     let resultsPrefix = decodeURI(props.queryText)
