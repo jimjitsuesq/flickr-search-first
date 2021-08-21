@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import logo from '../logo2.jpg';
+import logo from '../logo3.png';
 
 /**
  * Renders the search form and handles the app's search submission functionality, 
