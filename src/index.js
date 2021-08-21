@@ -6,7 +6,6 @@ import {BrowserRouter} from "react-router-dom"
 
 ReactDOM.render(
   <React.StrictMode>
-    {/* <BrowserRouter basename="/flickr-react-gallery"> */}
     <BrowserRouter>
       <App />
     </BrowserRouter>
