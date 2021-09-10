@@ -14,7 +14,7 @@ function App() {
     const [images, setImages] = useState([]);
     const [loading, setLoading] = useState(true);
     const [queryText, setQueryText] = useState('');
-
+    console.log(process.env.REACT_APP_API_KEY)
     /**
      * Used to update the state variables after navigation in the app.
      * @param {string} str Used to pass the search string from the Nav and
@@ -35,6 +35,7 @@ function App() {
             try {
                 if(window.location.pathname !== '/'  && queryText !== '') {
                 const response = await axios.get(`https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=${process.env.REACT_APP_API_KEY}&tags=${queryText}&per_page=24&sort=interestingness-asc&format=json&nojsoncallback=1`)
+                console.log(response)
                 setImages(response.data.photos.photo)
                 setLoading(false)
                 }
