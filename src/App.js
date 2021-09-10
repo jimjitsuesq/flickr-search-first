@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { Route, Switch } from 'react-router-dom';
 import axios from 'axios';
 
-import apiKey from './config.js'
 import './App.css';
 import './css/index.css';
 import PhotoList from './Components/PhotoList';
@@ -35,7 +34,7 @@ function App() {
         async function getPhotos () {
             try {
                 if(window.location.pathname !== '/'  && queryText !== '') {
-                const response = await axios.get(`https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=${apiKey}&tags=${queryText}&per_page=24&sort=interestingness-asc&format=json&nojsoncallback=1`)
+                const response = await axios.get(`https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=${process.env.REACT_APP_API_KEY}&tags=${queryText}&per_page=24&sort=interestingness-asc&format=json&nojsoncallback=1`)
                 setImages(response.data.photos.photo)
                 setLoading(false)
                 }
