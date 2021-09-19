@@ -77,3 +77,4 @@ typings/
 
 # misc
 src/config.js
+.env
